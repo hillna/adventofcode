@@ -1,0 +1,7 @@
+--2021-12-09 01:36:05--  https://adventofcode.com/2021/day/2/input
+Loaded CA certificate '/etc/ssl/certs/ca-certificates.crt'
+Resolving adventofcode.com (adventofcode.com)... 52.20.190.89, 18.235.250.107
+Connecting to adventofcode.com (adventofcode.com)|52.20.190.89|:443... connected.
+HTTP request sent, awaiting response... 400 Bad Request
+2021-12-09 01:36:05 ERROR 400: Bad Request.
+
