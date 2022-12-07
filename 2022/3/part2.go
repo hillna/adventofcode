@@ -3,43 +3,41 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 )
 
-func itemPriority(item string) int {
-
-	priorities := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-	priority := strings.Index(priorities, item) + 1
-
-	return priority
-}
+const priorities = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 func main() {
 
-	input, err := os.Open("input.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
+	input, _ := os.Open("input.txt")
 	defer input.Close()
-	scanner := bufio.NewScanner(input)
+	reader := bufio.NewReader(input)
+
+	var lines []string
+
+	for {
+		line, _ := reader.ReadString('\n')
+		if len(strings.TrimSpace(line)) == 0 {
+			break
+		}
+
+		lines = append(lines, line)
+	}
 
 	total := 0
-	for scanner.Scan() {
-		text := scanner.Text()
-		index := len(text) / 2
+	for i := 0; i < len(lines); i += 3 {
 
-		container1 := text[:index]
-		container2 := text[index:]
+		itemsList := lines[i]
+		for x := 0; x < len(itemsList); x++ {
+			item := string(itemsList[x])
 
-		for x := 0; x < len(container1); x++ {
-			item := string(container1[x])
-
-			if strings.Index(container2, item) > -1 {
-				total = total + itemPriority(item)
-				break
+			if strings.Index(lines[i+1], item) > -1 {
+				if strings.Index(lines[i+2], item) > -1 {
+					total += strings.Index(priorities, item) + 1
+					break
+				}
 			}
 		}
 	}

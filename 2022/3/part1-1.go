@@ -31,7 +31,7 @@ func main() {
 			item := string(container1[x])
 
 			if strings.Index(container2, item) > -1 {
-				total = total + strings.Index(priorities, item) + 1
+				total += strings.Index(priorities, item) + 1
 				break
 			}
 		}
